@@ -1,39 +1,32 @@
-# 1.8.9ForgeTemplate
+# Better Emotes
+## Add easy, fun emotes to the game!
 
-A fixed and ready to use template for minecraft forge modding on `1.8.9`
-with `shadow` plugin integrated including two useful `artifacts`. Tested flawlessly on `IntelliJ IDEA Ultimate 2022.2`
+Ever wanted to use fancy emotes without needing MVP++? Now you can!
 
-```js
-       java   8
-     gradle   3.1
-     shadow   2.0.4
-  minecraft   1.8.9
-forgegradle   2.1-SNAPSHOT
-```
+### Features:
+- **/emotes** ([enable|disable])
+    - `/emotes`: Lists available emotes. Click on one to send it in chat.
+    - `/emotes [enable|disable]` (Optional): Toggles the ability to use emotes in chat.
 
-## Setup
-1. Clone this repository.
-2. Import `build.gradle` as a project.
-3. Let it configure.
-4. Run `setupDecompWorkspace` in Gradle: `Tasks > forgegradle > setupDecompWorkspace`
-5. Reload gradle project.
-> *Check out [#build](#build), [#run](#run) and [#artifacts](#artifacts) for more information.*
+- **Chat Emotes**
+    - Send emotes directly in chat.
+    - All available emotes are listed in `/emotes`.
+    - Type the emote (usually surrounded by colons `:`) into chat, and it will automatically replace with the correct emote.
+    - Example: Typing `:heart:` will replace it with ❤️.
 
-## Build
-> *Note: If the build ever finishes with an error looking like `duplicate entry`, then run `clean` in Gradle: `Tasks > build > clean`*
+---
 
-&emsp;Run `build` in Gradle: `Tasks > build > build`
-> Output .jar will be located in `build/libs/`
+## 👤 **Authors**
 
-## Run
-&emsp;Run `genIntellijRuns` in Gradle: `Tasks > forgegradle > genIntellijRuns`
-> This will create the run configurations. <br> *Note: you will need to change the classpath module to `.main`*
+| ![qloha](https://avatars.githubusercontent.com/u/172928329?v=4&s=100) |  
+|:---------------------------------------------------------------------:|  
+|               **[qloha](https://www.github.com/qloha)**               |  
 
-> You should add `CopyResources` from [#artifacts](#artifacts) as a `Task before launch` and drag it in front of build.
+---
 
-## Artifacts
-> *Note: If the artifacts are not detected on setup, you might need to restart your IntelliJ.*
+## 🔗 **Links**
 
-&emsp;I have included two useful artifacts that I always use when developing mods:
-- `CopyMod` copies the mod from your [#build](#build) folder into your `%appdata%/.minecraft/mods`
-- `CopyResources` copies the resources folder to your `build/classes/main` so they are accessible in the development environment
+Stay connected and explore more:
+
+[![Portfolio](https://img.shields.io/badge/portfolio-0A0A0A?style=for-the-badge&logo=ko-fi&logoColor=white)](https://qloha.github.io/about/)  
+[![GitHub](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/qloha/Sora-OS)
