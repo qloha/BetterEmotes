@@ -1,0 +1,16 @@
+[
+{
+  "modid": "betteremotes",
+  "name": "BetterEmotes",
+  "description": "Adding easy emotes to the game. Ever wanted to be able to have fancy emotes without MVP++? Now you can!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["qloha"],
+  "credits": "https://youtube.com/@qloha | https://github.com/qloha",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["Minecraft Forge 1.8.9"]
+}
+]

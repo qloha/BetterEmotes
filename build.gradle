@@ -1,0 +1,108 @@
+import net.minecraftforge.gradle.user.IReobfuscator
+
+buildscript {
+    repositories {
+        maven { url "https://maven.minecraftforge.net" }
+        maven { url "https://repo.spongepowered.org/maven" }
+    }
+    dependencies {
+        classpath "net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT"
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.4"
+    }
+}
+
+plugins {
+    id "java"
+    id "com.github.johnrengelman.shadow" version "2.0.4"
+}
+
+apply plugin: "net.minecraftforge.gradle.forge"
+
+version = "1.0"
+group = "io.github.qloha"
+archivesBaseName = "BetterEmotes"
+
+sourceCompatibility = targetCompatibility = 1.8
+compileJava.options.encoding = "UTF-8"
+
+minecraft {
+    version = "1.8.9-11.15.1.2318-1.8.9"
+    runDir = "run"
+    mappings = "stable_22"
+    makeObfSourceJar = false
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.spongepowered.org/maven" }
+}
+
+dependencies {
+    implementation group: "commons-io", name: "commons-io", version: '2.14.0'
+    implementation 'org.jetbrains:annotations:24.1.0'
+
+}
+
+configurations {
+    embed
+    compile.extendsFrom embed
+    shade
+    compile.extendsFrom shade
+}
+
+shadowJar {
+    configurations = [project.configurations.embed, project.configurations.shade]
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE // Prevent duplicate entries
+    classifier "" // Prevent creation of unshadowed jar
+    dependencies {
+        exclude(dependency("com.google.code.gson:gson:2.8.6")) // Example of excluding a library
+    }
+}
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include "mcmod.info"
+        expand "version": project.version, "mcversion": project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "mcmod.info"
+    }
+}
+
+jar {
+    from(configurations.embed.collect {
+        it.isDirectory() ? it : zipTree(it)
+    }) {
+        exclude 'dummyThing',
+                'LICENSE.txt',
+                'LICENSE',
+                'AUTHORS',
+                'README.md',
+                'META-INF/MUMFREY.RSA',
+                'META-INF/maven/**',
+                'org/**/*.html',
+                'release-timestamp.txt',
+                'changelog.txt'
+    }
+    manifest {
+        attributes(
+                "ModSide": "CLIENT"
+        )
+    }
+}
+
+reobf {
+    shadowJar {} // Reobfuscate the shadowed jar
+    jar {
+        mappingType = "SEARGE" // Use SEARGE mappings for Forge 1.8.9
+    }
+}
+
+task copyDep(type: Copy) {
+    from configurations.runtimeClasspath
+    into 'dependencies'
+}
